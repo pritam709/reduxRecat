@@ -1,18 +1,28 @@
-import { createStore } from "redux";
-const reducerFn = (state = { counter: 0 }, action) => {
-  if (action.type === "increment") {
-    return {
-      counter: state.counter + 2,
-    };
-  }
-  if (action.type === "decrement") {
-    return {
-      counter: state.counter - 2,
-    };
-  }
 
-  return state;
-};
-const store = createStore(reducerFn);
+import {createSlice,configureStore} from "@reduxjs/toolkit"
+const initialState={isAuthenticated:false}
+ const authSlice=createSlice({
+    name:"auth",
+    initialState:initialState,
+    reducers:{
+        login (state){
+             state.isAuthenticated=true;
+        },
+        logout(state){
+         state.isAuthenticated=false;
+        }
+    }
+ })
+
+
+
+
+
+
+const store = configureStore({
+    reducer:authSlice.reducer,
+});
+
+export const authActions= authSlice.actions;
 
 export default store;
